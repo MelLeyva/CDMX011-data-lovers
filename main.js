@@ -1,51 +1,34 @@
-import { searchByTeam } from "./data.js";
-import { searchBySport } from "./data.js";
-import { searchByGender } from "./data.js";
-import { searchByMedal } from "./data.js";
-console.log(searchByTeam);
-//import athletes from './data/athletes/athletes.js';
-//import data from './data/athletes/athletes.js';
+import { searchByTeam, sortByAtoZ, searchBySport, searchByGender, searchByMedal } from "./data.js";
 
-/*let titulo = document.getElementById("olympics-title");
- */
-const firstPage = document.querySelector(".reseña");
-//const  cardSection= document.querySelector(".allCards");
-let ocultarPaginacion = document.querySelector("#hidePagination");
-let imgNoResult = document.getElementById("root")
-let divAthletes = document.getElementById("athletes");
 let selectPais = document.getElementById("pais");
 let selectSport = document.getElementById("deportes");
 let selectGender = document.getElementById("genero");
 let selectMedal = document.getElementById("medallas");
+let divAthletes = document.getElementById("athletes");
+const firstPage = document.querySelector(".reseña");
+let ocultarPaginacion = document.querySelector("#hidePagination");
+let imgNoResult = document.getElementById("root");
 let pagination = document.getElementById("pagination");
-let avatar = 12;
+let avatar = 10;
 let currentPage = 1;
-//console.log("firstpage" + firstPage);
-hideFpageBtn(false);
-
 document.querySelector(".button").addEventListener("click", reset);
 
-selectPais.addEventListener("change", function () {
+hideFpageBtn(false);
+
+
+
+function listenerFn() {
   filtrar();
   hideFpageBtn(true);
-});
+}
 
-selectSport.addEventListener("change", function () {
-  filtrar();
-  hideFpageBtn(true); 
-  
-});
+selectPais.addEventListener("change", listenerFn )
 
-selectGender.addEventListener("change", function () {
-  filtrar();
-  hideFpageBtn(true);
-});
+selectSport.addEventListener("change", listenerFn )
 
-selectMedal.addEventListener("change", function () {
-  filtrar();
-  hideFpageBtn(true);
+selectGender.addEventListener("change", listenerFn )
 
-});
+selectMedal.addEventListener("change", listenerFn )
 
 function filtrar() {
   let items = []; //determinamos el array vacio para que lo ocupe dataX cuando se hace una busqueda previa
@@ -55,14 +38,9 @@ function filtrar() {
   let medal = selectMedal.value;
   divAthletes.innerHTML = "";
   pagination.innerHTML = "";
-
   let opcionesSeccionadas = [];
-  //console.log("Deporte: " + deporte);
-  //console.log("pais: " + pais);
-  //console.log("genero: " + genero);
-  //console.log("medalla: " + medal);
 
-  if (pais != "Selecciona un pais") {
+  if (pais != "Selecciona un país") {
     opcionesSeccionadas.push("pais");
     if (opcionesSeccionadas.length == 1) {
       items = searchByTeam(items, pais, true);
@@ -71,7 +49,7 @@ function filtrar() {
     //console.log(items);
   }
 
-  if (deporte != "Selecciona una Disciplina") {
+  if (deporte != "Selecciona una disciplina") {
     opcionesSeccionadas.push("disciplina");
     if (opcionesSeccionadas.length == 1) {
       items = searchBySport(items, deporte, true);
@@ -98,6 +76,7 @@ function filtrar() {
   imgNoResult.hidden = !items.length == 0;
   //console.log(items);
   if(items.length > 0){
+    items = sortByAtoZ(items);
     setupPagination(items, pagination, avatar);
     DisplayList(items, divAthletes, avatar, currentPage);
   }
@@ -115,32 +94,6 @@ function setupPagination(items, wrapper, avatarPerPage) {
   }
   //console.log("Esto tiene el wrapper");
   //console.log(wrapper);
-}
-
-
-function reset() {
-  selectPais.value = "Selecciona un pais";
-  selectSport.value = "Selecciona una Disciplina";
-  selectGender.value = "Selecciona el género";
-  selectMedal.value = "Selecciona una medalla";
-  divAthletes.innerHTML = "";
-  hideFpageBtn(false);
-  imgNoResult.hidden=true;
-}
-function hideFpageBtn(ocultar) {
-    firstPage.hidden = ocultar;
-    ocultarPaginacion.hidden = !ocultar;
-  }
-  
-function DisplayList(items, divAthletes, avatarPerPage, page) {
-  page--;
-  let loopStart = avatarPerPage * page;
-  //console.log(loopStart)
-  let paginatedItems = items.slice(loopStart, loopStart + avatarPerPage);
-  //console.log(paginatedItems);
-  paginatedItems.forEach((a) =>
-    divAthletes.appendChild(obtenerElementoAtleta(a))
-  );
 }
 function paginationButton(page, items) {
   let button = document.createElement("button");
@@ -165,7 +118,24 @@ function buttonActive(currentPage, page, button) {
   currentBtn.classList.remove("active");
 }
 
+function DisplayList(items, divAthletes, avatarPerPage, page) {
+  page--;
+  let loopStart = avatarPerPage * page;
+  //console.log(loopStart)
+  let paginatedItems = items.slice(loopStart, loopStart + avatarPerPage);
+  //console.log(paginatedItems);
+  paginatedItems.forEach((a) =>
+    divAthletes.appendChild(obtenerElementoAtleta(a))
+    
+  );
+}
+
+
 function obtenerElementoAtleta(atleta) {
+  const divTarjeta = document.createElement("div");
+  divTarjeta.classList.add("tarjeta");
+  const divInner = document.createElement("div");
+  divInner.classList.add("tarjeta-inner");
   const div = document.createElement("div");
   div.classList.add("collection");
   let divContainerImage = document.createElement("div");
@@ -174,52 +144,61 @@ function obtenerElementoAtleta(atleta) {
   img.src = "images/" + atleta.gender + ".png";
   divContainerImage.appendChild(img);
   div.appendChild(divContainerImage);
-  const aName = document.createElement("div");
+  let divContainerMedal = document.createElement("div");
+  divContainerMedal.classList.add("circularMedal");
+  let imgMedal = document.createElement("IMG");
+  imgMedal.src = "images/" + atleta.medal + ".png";
+  divContainerMedal.appendChild(imgMedal);
+  div.appendChild(divContainerMedal);
+  const aName = document.createElement("p");
   aName.innerHTML = atleta.name;
   aName.classList.add("name_athlet");
-  const aSport = document.createElement("div");
-  aSport.innerHTML = "Deporte: " + atleta.sport;
-  aSport.classList.add("dato");
-  const aTeam = document.createElement("div");
-  aTeam.innerHTML = "Pais: " + atleta.team + " (" + atleta.noc + ")";
+  const aNameBack = document.createElement("div");
+  aNameBack.innerHTML = atleta.name;
+  aNameBack.classList.add("nameBack");
+  const aSport = document.createElement("p");
+  aSport.classList.add("sport");
+  const aTeam = document.createElement("p");
   aTeam.classList.add("team_athlet");
-  const aEvent = document.createElement("div");
-  aEvent.innerHTML = "Evento: " + atleta.event;
-  aEvent.classList.add("dato");
-  const aMedal = document.createElement("div");
-  aMedal.innerHTML = "Medalla: " + atleta.medal;
-  aMedal.classList.add("medall");
-  const aGender = document.createElement("div");
-  aGender.innerHTML = "Genero: " + atleta.gender;
-  aGender.classList.add("dato");
-  const aAge = document.createElement("div");
-  aAge.innerHTML = "Edad: " + atleta.age + " años";
-  aAge.classList.add("dato");
-  const aWeight = document.createElement("div");
-  aWeight.innerHTML = "Peso: " + atleta.weight + " kg";
-  aWeight.classList.add("dato");
-  const aHeight = document.createElement("div");
-  aHeight.innerHTML = "Estatura: " + atleta.height + " cm";
-  aHeight.classList.add("dato");
+  
   div.appendChild(aName);
-  div.appendChild(aTeam);
-  div.appendChild(aMedal);
-  div.appendChild(aSport);
-  div.appendChild(aEvent);
-  div.appendChild(aGender);
-  div.appendChild(aAge);
-  div.appendChild(aWeight);
-  div.appendChild(aHeight);
-  return div;
-}
-
-/*titulo.innerHTML = data.games + " Ciudad: "+data.city;
-let cards= function showData () {
-    data.athletes.forEach(function(atleta){
-
+  div.appendChild(getFormatStrong("País: ", atleta.team + " (" + atleta.noc + ")"));
+  div.appendChild(getFormatStrong("Deporte: ", atleta.sport));
    
-        divAthletes.appendChild(ul);
-    })
+  const divAtras = document.createElement("div");
+  divAtras.classList.add("atras");
+  divAtras.appendChild(aNameBack);
+  divAtras.appendChild(getFormatStrong("Evento: ", atleta.event));
+  divAtras.appendChild(getFormatStrong("Edad: ", atleta.age + " años"));
+  divAtras.appendChild(getFormatStrong("Peso: ", atleta.weight + " kg"));
+  divAtras.appendChild(getFormatStrong("Estatura: ", atleta.height + " cm"));
+
+  divInner.appendChild(div);
+  divInner.appendChild(divAtras);
+  divTarjeta.appendChild(divInner);
+  return divTarjeta;
 }
-console.log(cards);
-*/
+function reset() {
+  selectPais.value = "Selecciona un país";
+  selectSport.value = "Selecciona una disciplina";
+  selectGender.value = "Selecciona el género";
+  selectMedal.value = "Selecciona una medalla";
+  divAthletes.innerHTML = "";
+  hideFpageBtn(false);
+  imgNoResult.hidden=true;
+}
+function hideFpageBtn(ocultar) {
+    firstPage.hidden = ocultar;
+    ocultarPaginacion.hidden = !ocultar;
+  }
+  
+  function getFormatStrong(titulo, valor){
+  const aSpan = document.createElement("span");
+  aSpan.classList.add("a-span");
+  const sStrong = document.createElement("span");
+  sStrong.classList.add("strong");
+  aSpan.innerHTML = titulo;
+  sStrong.innerHTML=  valor;
+  aSpan.appendChild(sStrong);
+  return aSpan;
+  }

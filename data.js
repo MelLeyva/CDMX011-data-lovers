@@ -1,16 +1,23 @@
 // estas funciones son de ejemplo
 //import athletes from "./data/athletes/athletes.js";
-import data from "./data/athletes/athletes.js";
+import data from "./data/athletes/athletes.js";//obtiene los datos d ela base de datos original  
 
-export const name = data.athletes.sort((a, b) => {
+
+export function sortByAtoZ(data){
+  let aToZ= data.sort((a, b) => {
+    return a.name < b.name ? -1 : 1;
+})
+return aToZ;
+}
+/*xport const name = data.athletes.sort((a, b) => {
   return a.name < b.name ? -1 : 1;
 });
-//console.log(name);
+//console.log(name);*/
 
-export function searchByTeam(dataX, pais, buscarTodo) {
+export function searchByTeam(dataX, pais, buscarTodo, datA=data.athletes) {
   let filterPerTeam;
   if (buscarTodo) {
-    filterPerTeam = data.athletes.filter(function (atleta) {
+    filterPerTeam = datA.filter(function (atleta) {
       return atleta.team == pais;
     });
   } else {
@@ -20,10 +27,10 @@ export function searchByTeam(dataX, pais, buscarTodo) {
   }
   return filterPerTeam;
 }
-export function searchBySport(dataX, deporte, buscarTodo) {
+export function searchBySport(dataX, deporte, buscarTodo, datA=data.athletes) {
   let filterPerSport;
   if (buscarTodo) {
-    filterPerSport = data.athletes.filter(function (atleta) {
+    filterPerSport = datA.filter(function (atleta) {
       return atleta.sport == deporte;
     });
   } else {
@@ -33,10 +40,10 @@ export function searchBySport(dataX, deporte, buscarTodo) {
   }
   return filterPerSport;
 }
-export function searchByGender(dataX, genero, buscarTodo) {
+export function searchByGender(dataX, genero, buscarTodo, datA=data.athletes) {
   let filterPerGender;
   if (buscarTodo) {
-    filterPerGender = data.athletes.filter(function (atleta) {
+    filterPerGender = datA.filter(function (atleta) {
       return atleta.gender == genero;
     });
   } else {
@@ -47,10 +54,10 @@ export function searchByGender(dataX, genero, buscarTodo) {
   return filterPerGender;
 }
 
-export function searchByMedal(dataX, medalla, buscarTodo) {
+export function searchByMedal(dataX, medalla, buscarTodo, datA=data.athletes) {
   let filterPerMedal;
   if (buscarTodo) {
-    filterPerMedal = data.athletes.filter(function (atleta) {
+    filterPerMedal = datA.filter(function (atleta) {
       return atleta.medal == medalla;
     });
   } else {
