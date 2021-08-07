@@ -167,7 +167,7 @@ select:hover {
   width: 100%;
 }
 
-.botoncito button {
+.pageBtn button {
   width: 50px;
   height: 25px;
 
@@ -185,12 +185,12 @@ select:hover {
   box-shadow: 0.5px 2px #888888;
 }
 
-.botoncito button.active {
+.pageBtn button.active {
   background-color: #ef6b24;
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
-.botoncito button:hover {
+.pageBtn button:hover {
   background-color: #8de4df;
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
@@ -202,7 +202,7 @@ select:hover {
   justify-content: space-evenly
 }
 
-.collection ,.atras {
+.collection ,.back {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -223,7 +223,7 @@ select:hover {
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
-.collection, .atras {
+.collection, .back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -231,7 +231,7 @@ select:hover {
   backface-visibility: hidden;
 }
 
-.tarjeta {
+.card {
   background-color: transparent;
   width: 300px;
   height: 520px;
@@ -239,7 +239,7 @@ select:hover {
 }
 
 /* This container is needed to position the front and back side */
-.tarjeta-inner {
+.card-inner {
   position: relative;
   width: 95%;
   height: 95%;
@@ -249,11 +249,11 @@ select:hover {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.tarjeta:hover .tarjeta-inner {
+.card:hover .card-inner {
   transform: rotateY(180deg);
 }
 
-.atras{
+.back{
   transform: rotateY(180deg);
 }
 
