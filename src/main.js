@@ -6,11 +6,13 @@ const selectGender = document.querySelector("#genero");
 const selectMedal = document.querySelector("#medallas");
 const divAthletes = document.querySelector("#athletes");
 const firstPage = document.querySelector(".reseña");
+
 const hiddenPagination = document.querySelector("#hidePagination");
 const imgNoResult = document.querySelector("#root");
 const pagination = document.querySelector("#pagination");
 const avatar = 10;
 const currentPage = 1;
+
 document.querySelector(".button").addEventListener("click", reset);
 
 hideFpageBtn(false);
