@@ -22,13 +22,13 @@ function listenerFn() {
   hideFpageBtn(true);
 }
 
-selectPais.addEventListener("change", listenerFn )
+selectPais.addEventListener("change", listenerFn)
 
-selectSport.addEventListener("change", listenerFn )
+selectSport.addEventListener("change", listenerFn)
 
-selectGender.addEventListener("change", listenerFn )
+selectGender.addEventListener("change", listenerFn)
 
-selectMedal.addEventListener("change", listenerFn )
+selectMedal.addEventListener("change", listenerFn)
 
 function filtrar() {
   let items = []; //determinamos el array vacio para que lo ocupe dataX cuando se hace una busqueda previa
@@ -75,7 +75,7 @@ function filtrar() {
   }
   imgNoResult.hidden = !items.length == 0;
   //console.log(items);
-  if(items.length > 0){
+  if (items.length > 0) {
     items = sortByAtoZ(items);
     setupPagination(items, pagination, avatar);
     DisplayList(items, divAthletes, avatar, currentPage);
@@ -105,7 +105,7 @@ function paginationButton(page, items) {
     divAthletes.innerHTML = "";
     DisplayList(items, divAthletes, avatar, currentPage);
     buttonActive(currentPage, page, button);
-    imgNoResult.hidden=true;
+    imgNoResult.hidden = true;
   });
   return button;
 }
@@ -121,10 +121,10 @@ function DisplayList(items, divAthletes, avatarPerPage, page) {
   let loopStart = avatarPerPage * page;
   //console.log(loopStart) me indica cuantos deportistas previos a detemrinada página tienes 
   let paginatedItems = items.slice(loopStart, loopStart + avatarPerPage);
- // console.log(paginatedItems)me indica cuantos deportistas previos a detemrinada página tienes (only God Knows);
+  // console.log(paginatedItems)me indica cuantos deportistas previos a detemrinada página tienes (only God Knows);
   paginatedItems.forEach((a) =>
     divAthletes.appendChild(getElementAthletes(a))
-    
+
   );
 }
 
@@ -158,11 +158,11 @@ function getElementAthletes(atleta) {
   aSport.classList.add("sport");
   const aTeam = document.createElement("p");
   aTeam.classList.add("team_athlet");
-  
+
   div.appendChild(aName);
   div.appendChild(getFormatStrong("País: ", atleta.team + " (" + atleta.noc + ")"));
   div.appendChild(getFormatStrong("Deporte: ", atleta.sport));
-   
+
   const divBack = document.createElement("div");
   divBack.classList.add("back");
   divBack.appendChild(aNameBack);
@@ -183,20 +183,20 @@ function reset() {
   selectMedal.value = "Selecciona una medalla";
   divAthletes.innerHTML = "";
   hideFpageBtn(false);
-  imgNoResult.hidden=true;
+  imgNoResult.hidden = true;
 }
 function hideFpageBtn(ocultar) {//Depende del parametro que reciba false or true
-    firstPage.hidden = ocultar;//true=queloesconda
-    hiddenPagination.hidden = !ocultar;//false=quelomuestre
-  }
-  
-  function getFormatStrong(key, value){
+  firstPage.hidden = ocultar;//true=queloesconda
+  hiddenPagination.hidden = !ocultar;//false=quelomuestre
+}
+
+function getFormatStrong(key, value) {
   const formatStrong = document.createElement("span");
   formatStrong.classList.add("a-span");
   const formatLight = document.createElement("span");
   formatLight.classList.add("strong");
   formatStrong.innerHTML = key;
-  formatLight.innerHTML=  value;
+  formatLight.innerHTML = value;
   formatStrong.appendChild(formatLight);
   return formatStrong;
-  }
+}
