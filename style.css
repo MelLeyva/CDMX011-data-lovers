@@ -113,7 +113,7 @@ h1 {
   display: flex;
   justify-content: space-evenly;
   align-items: baseline;
-  background-color: #FFDE27/* url(images/menu.png)*/;
+  background-color: #ffde27 /* url(images/menu.png)*/;
   margin-top: 30px;
 }
 .menu select {
@@ -124,7 +124,7 @@ h1 {
   font-size: 20px;
   margin: 25px;
   align-content: center;
-  background-color: #EFA21F;
+  background-color: #efa21f;
   border-radius: 8px;
 }
 option:checked {
@@ -144,15 +144,14 @@ select:hover {
   margin: 20px;
   align-content: center;
   border-radius: 8px;
-  background-color: #3F9CB1;
-  
+  background-color: #3f9cb1;
 }
 .button:hover {
-  background-color: #39B5AF;
+  background-color: #39b5af;
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 .button:active {
-  background-color: #39B5AF;
+  background-color: #39b5af;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -167,7 +166,7 @@ select:hover {
   width: 100%;
 }
 
-.botoncito button {
+.pageBtn button {
   width: 50px;
   height: 25px;
 
@@ -185,12 +184,12 @@ select:hover {
   box-shadow: 0.5px 2px #888888;
 }
 
-.botoncito button.active {
+.pageBtn button.active {
   background-color: #ef6b24;
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
-.botoncito button:hover {
+.pageBtn button:hover {
   background-color: #8de4df;
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
@@ -199,17 +198,18 @@ select:hover {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly
+  justify-content: space-evenly;
 }
 
-.collection ,.atras {
+.collection,
+.back {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   width: 300px;
-  height: 520px; 
+  height: 520px;
   padding: 10px;
   margin: 10px;
   margin-bottom: 15px;
@@ -217,13 +217,15 @@ select:hover {
   background-image: url(images/fondoCard.png);
   background-size: 100% 100%;
   border: 10px solid rgba(255, 255, 255, 0.89);
-  box-sizing: border-box;filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-sizing: border-box;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.collection, .atras {
+.collection,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -231,7 +233,7 @@ select:hover {
   backface-visibility: hidden;
 }
 
-.tarjeta {
+.card {
   background-color: transparent;
   width: 300px;
   height: 520px;
@@ -239,7 +241,7 @@ select:hover {
 }
 
 /* This container is needed to position the front and back side */
-.tarjeta-inner {
+.card-inner {
   position: relative;
   width: 95%;
   height: 95%;
@@ -249,11 +251,11 @@ select:hover {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.tarjeta:hover .tarjeta-inner {
+.card:hover .card-inner {
   transform: rotateY(180deg);
 }
 
-.atras{
+.back {
   transform: rotateY(180deg);
 }
 
@@ -278,7 +280,8 @@ select:hover {
   height: 150px;
   margin-left: -13px;
 }
-.name_athlet, .nameBack {
+.name_athlet,
+.nameBack {
   font-family: "Pathway Gothic One", sans-serif;
   font-weight: bold;
   font-stretch: semi-expanded;
@@ -296,20 +299,18 @@ select:hover {
 .team_athlet {
   font-family: "Baloo Chettan 2", cursive;
   font-size: 23px;
-  font-weight:500;
+  font-weight: 500;
   border: rgb(12, 12, 12);
   margin-top: 5px;
   margin-bottom: -5px;
 }
-.sport{
-
+.sport {
   font-family: "Baloo Chettan 2", cursive;
   font-size: 20px;
   margin-bottom: -15px;
   margin-top: 15px;
-
 }
-.strong{
+.strong {
   font-family: "Baloo Chettan 2", cursive;
   font-size: 20px;
   font-weight: lighter;
@@ -317,13 +318,12 @@ select:hover {
 }
 .circularMedal {
   display: flex;
-  align-self:flex-end;
+  align-self: flex-end;
   align-content: flex-start;
   margin-top: -25px;
   margin-right: 28px;
   width: 75px;
   height: 85px;
-  
 }
 .circularMedal img {
   width: 70px;
@@ -349,7 +349,6 @@ select:hover {
 }
 
 @media screen and (min-width: 360px) and (max-width: 1131px) {
- 
   .menu {
     display: flex;
     flex-direction: column;
@@ -362,7 +361,7 @@ select:hover {
     margin-top: 20px;
     width: 50%;
   }
-    .button {
+  .button {
     font-size: 15px;
     width: 30%;
   }
