@@ -85,7 +85,6 @@ function filtrar() {
     DisplayList(items, divAthletes, avatar, currentPage);
   }
 }
-
 function setupPagination(items, wrapper, avatarPerPage) {
   let pageCount = Math.ceil(items.length / avatarPerPage);
 
@@ -93,12 +92,12 @@ function setupPagination(items, wrapper, avatarPerPage) {
     let btn = paginationButton(i, items);
     wrapper.appendChild(btn);
   }
-
 }
 function paginationButton(page, items) {
   let button = document.createElement("button");
-  button.value = page;
   let currentPage = page;
+
+  button.value = page;
   button.innerText = button.value;
 
   if (currentPage == page);
@@ -116,11 +115,9 @@ function buttonActive(currentPage, page, button) {
   button.classList.add("active");
   currentBtn.classList.remove("active");
 }
-
 function DisplayList(items, divAthletes, avatarPerPage, page) {
   page--;
-  let loopStart = avatarPerPage * page;
-  //console.log(loopStart) me indica cuantos deportistas previos a detemrinada página tienes 
+  let loopStart = avatarPerPage * page;//console.log(loopStart) me indica cuantos deportistas previos a detemrinada página tienes
   let paginatedItems = items.slice(loopStart, loopStart + avatarPerPage);
   paginatedItems.forEach((a) =>
     divAthletes.appendChild(getElementAthletes(a))
@@ -171,10 +168,10 @@ function getElementAthletes(atleta) {
   divBack.appendChild(getFormatStrong("Edad: ", atleta.age + " años"));
   divBack.appendChild(getFormatStrong("Peso: ", atleta.weight + " kg"));
   divBack.appendChild(getFormatStrong("Estatura: ", atleta.height + " cm"));
-
   divInner.appendChild(div);
   divInner.appendChild(divBack);
   divCards.appendChild(divInner);
+
   return divCards;
 }
 function reset() {
@@ -187,6 +184,7 @@ function reset() {
   imgNoResult.hidden = true;
 }
 
+
 function getFormatStrong(key, value) {
   const formatStrong = document.createElement("span");
   const formatLight = document.createElement("span");
@@ -196,7 +194,7 @@ function getFormatStrong(key, value) {
 
   formatStrong.innerHTML = key;
   formatLight.innerHTML = value;
-  
+
   formatStrong.appendChild(formatLight);
   return formatStrong;
 }
